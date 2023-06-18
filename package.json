@@ -14,6 +14,7 @@
     "@capacitor/core": "^5.0.4",
     "@capacitor/device": "^5.0.4",
     "@capacitor/share": "^5.0.2",
+    "@capacitor/splash-screen": "^5.0.4",
     "@next/font": "13.4.4",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",

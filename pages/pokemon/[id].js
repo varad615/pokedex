@@ -1,7 +1,9 @@
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import Head from "next/head";
 import { Share } from "@capacitor/share";
 import { HiShare } from "react-icons/hi";
+import { AiFillHome } from "react-icons/ai";
 import { FaWeightHanging, FaRulerVertical } from "react-icons/fa";
 import { useState } from "react";
 const Pokemon = ({ pokemon }) => {
@@ -20,6 +22,15 @@ const Pokemon = ({ pokemon }) => {
   };
   return (
     <div>
+      <Head>
+        <title className="capitalize">{pokemon.name} | Pokedex</title>
+        <meta name="description" content="Pokedex" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="icon"
+          href={pokemon.sprites.other.dream_world.front_default}
+        />
+      </Head>
       {/* <nav className="bg-white border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div className="flex justify-between">
@@ -55,12 +66,15 @@ const Pokemon = ({ pokemon }) => {
       </nav> */}
       <div className="navbar bg-white">
         <div className="flex-1">
-          <div className="flex items-center">
-            <img src="/icon.png" className="h-8 mr-3" alt="pokedex" />
-            <span className="self-center text-2xl whitespace-nowrap text-[#F7B916] font-bold">
-              Pokedex
-            </span>
-          </div>
+          <Link href="/">
+            <div className="flex items-center">
+              {/* <img src="/icon.png" className="h-8 mr-3" alt="pokedex" /> */}
+              <AiFillHome size={30} color="#ED1B24" className="mr-3" />
+              <span className="self-center text-2xl whitespace-nowrap text-[#F7B916] font-bold">
+                Pokedex
+              </span>
+            </div>
+          </Link>
         </div>
         <div className="flex-none">
           <button className="btn btn-square btn-ghost" onClick={() => share()}>
@@ -73,7 +87,7 @@ const Pokemon = ({ pokemon }) => {
         <div className="container mx-auto flex flex-col px-5 py-2 justify-center items-center">
           <img
             className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
-            src={pokemon.image}
+            src={pokemon.sprites.other.dream_world.front_default}
             alt={pokemon.name}
           />
           <div>
@@ -89,8 +103,9 @@ const Pokemon = ({ pokemon }) => {
                       {type.type.name}
                     </span>
                   </div> */}
+
                     <div className="pill">
-                      <p className="text-xs font-bold leading-none text-white">
+                      <p className="text-xs font-bold leading-none text-black">
                         {type.type.name}
                       </p>
                     </div>
@@ -178,6 +193,42 @@ const Pokemon = ({ pokemon }) => {
                   ></progress>
                 </div>
               </div>
+              <button
+                className="btn btn-wide bg-[#ED1B24] border-white text-white mt-6 hover:bg-red-100 hover:text-[#ED1B24] hover:border-[#ED1B24]"
+                onClick={() => window.my_modal_5.showModal()}
+              >
+                Moves
+              </button>
+              <dialog
+                id="my_modal_5"
+                className="modal modal-bottom sm:modal-middle"
+              >
+                <form method="dialog" className="modal-box bg-white">
+                  <div className="flex flex-wrap gap gap-2">
+                    {pokemon.moves.map((type, index) => (
+                      <>
+                        {/* <div key={index} className="flex">
+                    <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 pb-2 rounded">
+                      {type.type.name}
+                    </span>
+                  </div> */}
+
+                        <div className="pill2">
+                          <p className="text-xs font-bold leading-none text-white">
+                            {type.move.name}
+                          </p>
+                        </div>
+                      </>
+                    ))}
+                  </div>
+                  <div className="modal-action">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn bg-[#ED1B24] border-white text-white mt-6 hover:bg-red-100 hover:text-[#ED1B24] hover:border-[#ED1B24]">
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </dialog>
             </div>
           </div>
         </div>

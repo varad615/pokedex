@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HiShare } from "react-icons/hi";
 import Layout from "@/components/Layout";
 import { Device } from "@capacitor/device";
+import { SplashScreen } from "@capacitor/splash-screen";
 
 const inter = Inter({ subsets: ["latin"] });
 

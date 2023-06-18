@@ -2,7 +2,15 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import { Share } from "@capacitor/share";
 import { HiShare } from "react-icons/hi";
+import { FaWeightHanging, FaRulerVertical } from "react-icons/fa";
+import { useState } from "react";
 const Pokemon = ({ pokemon }) => {
+  const [hp, Sethp] = useState(pokemon.stats[0].base_stat);
+  const [attack, Setattack] = useState(pokemon.stats[1].base_stat);
+  const [defense, Setdefense] = useState(pokemon.stats[2].base_stat);
+  const [spd, Setspd] = useState(pokemon.stats[3].base_stat);
+  const [exp, Setexp] = useState(pokemon.stats[4].base_stat);
+
   const share = async () => {
     await Share.share({
       title: "Checkout this pokedex",
@@ -12,12 +20,12 @@ const Pokemon = ({ pokemon }) => {
   };
   return (
     <div>
-      <nav className="bg-white border-gray-200 ">
+      {/* <nav className="bg-white border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div className="flex justify-between">
             <div className="flex items-center">
               <img src="/icon.png" className="h-8 mr-3" alt="Flowbite Logo" />
-              <span className="self-center text-2xl whitespace-nowrap text-black font-bold">
+              <span className="self-center text-2xl whitespace-nowrap text-[#F7B916] font-bold">
                 Pokedex
               </span>
             </div>
@@ -25,11 +33,11 @@ const Pokemon = ({ pokemon }) => {
           </div>
         </div>
       </nav>
-      <nav className="bg-white fixed w-full z-20 top-0 left-0 ">
+      <nav className="bg-[#121212] fixed w-full z-20 top-0 left-0 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div className="flex items-center">
             <img src="/icon.png" className="h-8 mr-3" alt="pokedex" />
-            <span className="self-center text-2xl whitespace-nowrap text-black font-bold">
+            <span className="self-center text-2xl whitespace-nowrap text-[#F7B916] font-bold">
               Pokedex
             </span>
           </div>
@@ -44,45 +52,132 @@ const Pokemon = ({ pokemon }) => {
             </button>
           </div>
         </div>
-      </nav>
-      <section class="text-gray-600 body-font">
-        <div class="container mx-auto flex flex-col px-5 py-2 justify-center items-center">
+      </nav> */}
+      <div className="navbar bg-white">
+        <div className="flex-1">
+          <div className="flex items-center">
+            <img src="/icon.png" className="h-8 mr-3" alt="pokedex" />
+            <span className="self-center text-2xl whitespace-nowrap text-[#F7B916] font-bold">
+              Pokedex
+            </span>
+          </div>
+        </div>
+        <div className="flex-none">
+          <button className="btn btn-square btn-ghost" onClick={() => share()}>
+            <HiShare color="#F7B916" size={30} />
+          </button>
+        </div>
+      </div>
+
+      <section className="text-black body-font">
+        <div className="container mx-auto flex flex-col px-5 py-2 justify-center items-center">
           <img
-            class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
+            className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
             src={pokemon.image}
             alt={pokemon.name}
           />
-          <div class="w-full md:w-2/3 flex flex-col mb-16 items-center text-center">
-            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-              {pokemon.id}. {pokemon.name}
-            </h1>
-            <p class="mb-8 leading-relaxed">
-              <p>
-                <span className="font-bold mr-2">Weight:</span> {pokemon.weight}
+          <div>
+            <div className="w-full md:w-2/3 flex flex-col mb-16 items-center text-center">
+              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-bold text-black capitalize">
+                {pokemon.id}. {pokemon.name}
+              </h1>
+              <div className="flex flex-wrap gap gap-2">
+                {pokemon.types.map((type, index) => (
+                  <>
+                    {/* <div key={index} className="flex">
+                    <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 pb-2 rounded">
+                      {type.type.name}
+                    </span>
+                  </div> */}
+                    <div className="pill">
+                      <p className="text-xs font-bold leading-none text-white">
+                        {type.type.name}
+                      </p>
+                    </div>
+                  </>
+                ))}
+              </div>
+              <p className="w-80 text-3xl font-bold mt-8 leading-none text-center text-black">
+                About
               </p>
-              <p>
-                <span className="font-bold mr-2">Height:</span>
-                {pokemon.height}
-              </p>
-            </p>
-            <h2 className="font-bold mr-2 text-2xl mt-6 mb-2">Types</h2>
-            {pokemon.types.map((type, index) => (
-              <p key={index}>{type.type.name}</p>
-            ))}
 
-            <div class="flex">
-              <button class="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
-                <span class="ml-4 flex items-start flex-col leading-none">
-                  <span class="text-xs text-gray-600 mb-1">Weight</span>
-                  <span class="title-font font-medium">{pokemon.weight}</span>
-                </span>
-              </button>
-              <button class="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center ml-4 hover:bg-gray-200 focus:outline-none">
-                <span class="ml-4 flex items-start flex-col leading-none">
-                  <span class="text-xs text-gray-600 mb-1">Height</span>
-                  <span class="title-font font-medium">{pokemon.height}</span>
-                </span>
-              </button>
+              <div className="stats bg-white mt-4">
+                <div className="stat ">
+                  <div className="stat-figure text-secondary">
+                    <FaWeightHanging size={20} color="#DE1C25" />
+                  </div>
+                  <div className="stat-title text-black">Weight</div>
+                  <div className="stat-value text-black"> {pokemon.weight}</div>
+                </div>
+
+                <div className="stat border-black	">
+                  <div className="stat-figure text-secondary">
+                    <FaRulerVertical size={20} color="#DE1C25" />
+                  </div>
+                  <div className="stat-title text-black">Height</div>
+                  <div className="stat-value text-black">{pokemon.height}m</div>
+                </div>
+              </div>
+
+              <h2 className="font-bold mr-2 text-2xl mt-6 mb-2">Base Stats</h2>
+
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center space-x-2">
+                  <div className="text-[#F87272] font-bold border-2 border-white border-r-black pr-3">
+                    HP
+                  </div>
+                  <div className="text-[#F87272] font-bold">{hp}%</div>
+                  <progress
+                    className="progress w-56 progress-error "
+                    value={hp}
+                    max="100"
+                  ></progress>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="text-[#FBBD23] font-bold border-2 border-white border-r-black pr-3">
+                    ATK
+                  </div>
+                  <div className="text-[#FBBD23] font-bold">{attack}%</div>
+                  <progress
+                    className="progress w-56 progress-warning  "
+                    value={attack}
+                    max="100"
+                  ></progress>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="text-[#3ABFF8] font-bold border-2 border-white border-r-black pr-3">
+                    DEF
+                  </div>
+                  <div className="text-[#3ABFF8] font-bold">{defense}%</div>
+                  <progress
+                    className="progress w-56 progress-info"
+                    value={defense}
+                    max="100"
+                  ></progress>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="text-accent font-bold border-2 border-white border-r-black pr-3">
+                    SPD
+                  </div>
+                  <div className="text-accent font-bold">{spd}%</div>
+                  <progress
+                    className="progress w-56 progress-accent"
+                    value={spd}
+                    max="100"
+                  ></progress>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="text-success  font-bold border-2 border-white border-r-black pr-3">
+                    EXP
+                  </div>
+                  <div className="text-success  font-bold">{exp}%</div>
+                  <progress
+                    className="progress w-56 progress-success "
+                    value={exp}
+                    max="100"
+                  ></progress>
+                </div>
+              </div>
             </div>
           </div>
         </div>

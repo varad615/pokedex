@@ -23,7 +23,7 @@ export default function Home({ pokemon }) {
         <title>Pokedex</title>
         <meta name="description" content="Pokedex" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon.png" />
       </Head>
       {/* <nav className="bg-[#121212] w-full z-20 top-0 left-0 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

@@ -1,5 +1,5 @@
 # Pokedex
-
+![Pokedex](https://github.com/varad615/pokedex/assets/30592638/920fea58-9081-462d-a0a0-e9d28ed4fc4a)
 ## Overview
 Pokedex is a web application built using Next.js, Tailwind CSS, and Capacitor.js. It allows users to explore and search for information about different Pokémon using the PokeAPI. The application provides details such as the Pokémon's name, type, abilities, and more.
 
